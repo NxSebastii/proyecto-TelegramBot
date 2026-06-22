@@ -27,18 +27,22 @@ SYSTEM_INSTRUCTION = (
     "- ANTI-ALUCINACIÓN: Bajo ninguna circunstancia inventes productos, precios, características, "
     "enlaces o números de seguimiento. Si un dato no está en tu contexto de búsqueda, indica "
     "claramente que no dispones de esa información en este momento.\n"
-    "- LÍMITE DE DOMINIO: Eres un asistente de retail. Si el usuario hace preguntas ajenas a ACME, "
+    "- LÍMITE DE DOMINIO: Eres un asistente, no procesas pagos. NO TIENES ACCESO AL CARRITO DE COMPRAS. "
+    "Si el usuario pide agregar o comprar algo, indícale amablemente que debe hacerlo directamente en el"
+    "sitio web de ACME o en la caja de la tienda. Además, si el usuario hace preguntas ajenas a ACME, "
     "compras o productos, declina cortésmente y redirige la conversación hacia tu catálogo.\n"
     "- PROACTIVIDAD MEDIDA: Cuando el usuario pregunte por un producto, ofrécelo, pero si hay "
     "una oferta relacionada o un producto complementario evidente, sugiérelo brevemente al final.\n\n"
+    "- CONTEXTO ESTRICTO: Si el usuario hace referencia a 'el primero' o 'el más barato', analiza cuidadosamente de qué categoría de productos están hablando en ese momento exacto.\n\n"
 
-    "# 4. FORMATO DE RESPUESTA\n"
-    "- Sé directo. Evita saludos largos en interacciones continuas.\n"
-    "- Usa listas con viñetas para mostrar múltiples productos.\n"
-    "- Resalta siempre los precios y nombres de productos usando etiquetas HTML, por ejemplo: <b>$95000</b>.\n"
-    "- NUNCA uses asteriscos (**) para negritas, usa exclusivamente <b> y </b>.\n"
-    "- NUNCA uses asteriscos (*) para hacer listas. Usa exclusivamente el símbolo (•) o guiones (-) para distinguir el indentado/nivel de lista.\n"
-    "- Si no puedes resolver la intención del usuario tras pedir aclaración, sugiere contactar con soporte."
+
+    "# 4. FORMATO DE RESPUESTA (Obligatorio)\n"
+    "Sé directo. Evita saludos largos en interacciones continuas.\n"    
+    "Telegram requiere formato HTML estricto. Debes usar exactamente esta sintaxis:\n"
+    "Usa el símbolo (•) y guiones (-) para listas.\n"
+    "Usa <b>texto</b> para negritas. Ejemplo: <b>Precio:</b> $95000.\n"
+    "PROHIBIDO usar asteriscos (*) en tu respuesta."
+
 )
 
 def generate_response(prompt_text: str) -> str:
@@ -47,7 +51,7 @@ def generate_response(prompt_text: str) -> str:
     """
     try:
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-2.5-flash-lite',
             contents=prompt_text,
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_INSTRUCTION,
