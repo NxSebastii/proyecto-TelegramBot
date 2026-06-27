@@ -1,4 +1,4 @@
-# bot/llm_client.py
+import os
 import logging
 from google import genai
 from google.genai import types
@@ -35,7 +35,6 @@ SYSTEM_INSTRUCTION = (
     "una oferta relacionada o un producto complementario evidente, sugiérelo brevemente al final.\n\n"
     "- CONTEXTO ESTRICTO: Si el usuario hace referencia a 'el primero' o 'el más barato', analiza cuidadosamente de qué categoría de productos están hablando en ese momento exacto.\n\n"
 
-
     "# 4. FORMATO DE RESPUESTA (Obligatorio)\n"
     "Sé directo. Evita saludos largos en interacciones continuas.\n"    
     "Telegram requiere formato HTML estricto. Debes usar exactamente esta sintaxis:\n"
@@ -45,13 +44,13 @@ SYSTEM_INSTRUCTION = (
 
 )
 
-def generate_response(prompt_text: str) -> str:
+async def generate_response(prompt_text: str) -> str:
     """
     Envía un prompt a Gemini utilizando el nuevo SDK y devuelve la respuesta en texto plano.
     """
     try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash-lite',
+        response = await client.aio.models.generate_content(
+            model='gemini-2.5-flash',
             contents=prompt_text,
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_INSTRUCTION,
@@ -65,15 +64,13 @@ def generate_response(prompt_text: str) -> str:
             # Interceptamos el error de cuota/saturación (429)
             if "429" in error_msg:
                 return "Lo siento, en este momento tenemos un alto volumen de solicitudes. Por favor, intenta de nuevo en un minuto. 🛒"
-                
+
+            if "503" in error_msg:
+                return "Lo siento, en este momento los servicios de Google están presentando intermitencias. Por favor, intenta de nuevo mas tarde."
+
+
             return "Lo siento, en este momento tengo problemas técnicos para procesar tu solicitud. Intenta más tarde."
 
-
 """
-# --- BLOQUE DE PRUEBA AISLADA ---
-if __name__ == "__main__":
-    print("Iniciando prueba aislada de Gemini con el nuevo SDK...")
-    prueba_saludo = "Hola, ¿qué puedes hacer por mí?"
-    print(f"\nUsuario: {prueba_saludo}")
-    print(f"Gemini: {generate_response(prueba_saludo)}")
+RROR:bot.llm_client:Error al comunicarse con Gemini: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
 """

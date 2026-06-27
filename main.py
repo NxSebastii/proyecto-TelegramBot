@@ -22,6 +22,8 @@ def main():
     """
     logging.info("Iniciando el Agente Virtual de Retail (Modo Pruebas)...")
     
+
+    """
     # --- BLOQUE DE PRUEBA DE GEMINI ---
     logging.info("Verificando conexión con la API de Gemini...")
     try:
@@ -37,7 +39,8 @@ def main():
         logging.error(f"Fallo crítico: No se pudo conectar con Gemini. Detalle: {e}")
         return 
     # -----------------------------------
-
+    """
+    
     # Levantamos el bot de Telegram solo si Gemini respondió con éxito
     try:
         logging.info("Iniciando conexión con Telegram...")

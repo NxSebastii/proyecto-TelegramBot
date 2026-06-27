@@ -1,4 +1,6 @@
 import logging
+import time
+import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 from telegram.constants import ParseMode
@@ -16,14 +18,33 @@ from bot.llm_client import generate_response
 # Importamos el token desde nuestro archivo de configuración
 from config import TELEGRAM_TOKEN
 
-# Configuración básica de logging para ver la actividad y errores en consola
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
+def get_user_logger(chat_id: int):
+    # Aseguramos que la carpeta de logs exista
+    if not os.path.exists("logs"):
+        os.makedirs("logs")
+    
+    logger_name = f"user_{chat_id}"
+    user_logger = logging.getLogger(logger_name)
+    
+    # Evitamos añadir múltiples handlers si el logger ya existe
+    if not user_logger.handlers:
+        user_logger.setLevel(logging.INFO)
+        # Cada usuario tendrá su archivo en la carpeta /logs/
+        file_handler = logging.FileHandler(f"logs/chat_{chat_id}.log", encoding='utf-8')
+        formatter = logging.Formatter('%(asctime)s - %(message)s')
+        file_handler.setFormatter(formatter)
+        user_logger.addHandler(file_handler)
+        
+    return user_logger
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Maneja el comando inicial /start."""
+
+    chat_id = update.message.chat_id
+    user_logger = get_user_logger(chat_id)
+    user_logger.info(f"[ChatID: {chat_id}] ------------------------------------------")
+    user_logger.info(f"[ChatID: {chat_id}] Usuario inició el bot.")
+
     welcome_message = (
         "¡Hola! Soy Novac, tu asistente personal de compras inteligente. "
         "Estoy aquí para ayudarte a navegar por nuestro universo de productos.\n\n"
@@ -41,14 +62,23 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_message = update.message.text
     chat_id = str(update.message.chat_id)
 
+    user_logger = get_user_logger(chat_id)
+
+    # === 0. INICIO END-TO-END ===
+    start_time_total = time.perf_counter()
+    user_logger.info(f"[ChatID: {chat_id}] ------------------------------------------")
+    user_logger.info(f"[ChatID: {chat_id}] 1. Recepción: '{user_message}'")
+
+
     # 1. Recuperamos el estado de memoria del usuario
     session = get_or_create_session(chat_id)
 
     # 2. Enrutador Lógico
     intent = classify_intent(user_message)
-    logging.info(f"Intención detectada para {chat_id}: {intent}")
     
     # 3. Recuperación Dirigida (RAG)
+    start_time_rag = time.perf_counter()
+
     if intent == "catalogo":
         productos_recuperados = mock_search_products(user_message)
         if productos_recuperados:
@@ -63,6 +93,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Obtenemos la sesión actualizada después de la búsqueda
     session = get_or_create_session(chat_id)
 
+    # Medición latencia RAG
+    end_time_rag = time.perf_counter()
+    latencia_rag = (end_time_rag - start_time_rag) * 1000
+    user_logger.info(f"[ChatID: {chat_id}] 2. Latencia RAG: {latencia_rag:.2f} ms")
+
     # 4. Ensamblaje del Prompt Estructurado
     prompt_maestro = build_final_prompt(
         user_message=user_message,
@@ -72,8 +107,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     # 5. Generación con el LLM
-    logging.info(f"Consultando a Gemini para {chat_id}...")
-    respuesta_llm = generate_response(prompt_maestro)
+    user_logger.info(f"[ChatID: {chat_id}] 3. Generando respuesta con Gemini...")
+    start_time_llm = time.perf_counter()
+    respuesta_llm = await generate_response(prompt_maestro)
+    
+    end_time_llm = time.perf_counter()
+    latencia_llm = (end_time_llm - start_time_llm) * 1000
+    user_logger.info(f"[ChatID: {chat_id}] 4. Latencia Inferencia LLM: {latencia_llm:.2f} ms")
+
 
     # 6. Mantenimiento del Estado (La Regla de Oro)
     add_message_to_history(chat_id, "Cliente", user_message)
@@ -82,6 +123,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # 7. Respuesta Final
     await update.message.reply_text(respuesta_llm, parse_mode=ParseMode.HTML)
+
+    # 8. Cálculo final de latencia
+    end_time_total = time.perf_counter()
+    latencia_total = (end_time_total - start_time_total) * 1000
+    user_logger.info(f"[ChatID: {chat_id}] 5. Latencia TOTAL End-to-End: {latencia_total:.2f} ms")
+    user_logger.info(f"[ChatID: {chat_id}] ------------------------------------------")
 
 def main():
     """Inicializa la aplicación y mantiene el bot en escucha."""
@@ -93,7 +140,6 @@ def main():
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
     # Inicia el ciclo de escucha de mensajes (long polling)
-    logging.info("Iniciando el bot de Telegram...")
     application.run_polling()
 
 if __name__ == '__main__':
