@@ -37,10 +37,6 @@ def policy_data(policy_text):
     }
 
 def construir_texto_producto(producto):
-    """
-    Texto en español natural que se embebe con el modelo. Este texto NO se
-    muestra al usuario, solo sirve para que el modelo entienda el producto.
-    """
     return (
         f"{producto.get('nombre', '')}. "
         f"{producto.get('descripcion', '')}. "
@@ -84,40 +80,3 @@ def generar_embeddings():
 
 embeddings_productos, embeddings_politicas = generar_embeddings()
 
-def buscador_productos(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL_PRODUCTOS):
-    embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)
-    # Comparar con embeddings de productos
-    similitudes_productos = util.cos_sim(embedding_mensaje, embeddings_productos)[0]
-    orden_productos = similitudes_productos.argsort(descending=True)
-
-    resultados = []
-    for idx in orden_productos[:NProductos]:
-        if similitudes_productos[idx] >= umbral:
-            resultados.append(catalogo_resultados[idx])
-        else:
-            break
-    return resultados
-
-def buscador_politicas(mensaje, umbral = UMBRAL_POLITICAS):
-    # Comparar con embeddings de políticas
-    embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)
-    similitudes_politicas = util.cos_sim(embedding_mensaje, embeddings_politicas)[0]
-    orden_politicas = similitudes_politicas.argsort(descending=True)
-    resultados = []
-    for idx in orden_politicas:
-        if similitudes_politicas[idx] >= umbral:
-            resultados.append(politicas_resultados[idx])
-        else:
-            break
-
-    return resultados
-
-if __name__ == "__main__":
-    # Prueba rápida manual
-    consulta_prueba = "algo abrigado para el frío de la montaña"
-    print("Productos encontrados:")
-    for p in buscador_productos(consulta_prueba):
-        print("-", p["nombre"])
-
-    print("\nPolítica encontrada:")
-    print(buscador_politicas("quiero devolver un producto")[0]["tema"])

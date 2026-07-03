@@ -7,10 +7,10 @@ from telegram.constants import ParseMode
 
 
 from bot.memory import (
-    get_or_create_session, add_message_to_history, 
+    get_or_create_session, add_message_to_history,
     update_last_viewed_products, set_transient_context, clear_transient_context
 )
-from core.search_engine import classify_intent, mock_search_products, mock_search_policies
+from core.search_engine import classify_intent
 from bot.prompt_builder import build_final_prompt
 from bot.llm_client import generate_response
 
@@ -73,22 +73,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # 1. Recuperamos el estado de memoria del usuario
     session = get_or_create_session(chat_id)
 
-    # 2. Enrutador Lógico
-    intent = classify_intent(user_message)
-    
-    # 3. Recuperación Dirigida (RAG)
+    # 2. Enrutador + Recuperación Dirigida (RAG) — ahora unificados en classify_intent
     start_time_rag = time.perf_counter()
 
-    if intent == "catalogo":
-        productos_recuperados = mock_search_products(user_message)
-        if productos_recuperados:
-            # Solo sobrescribimos si encontramos algo nuevo, garantizando continuidad
-            update_last_viewed_products(chat_id, productos_recuperados)
-            
-    elif intent == "politicas":
-        politica_texto = mock_search_policies(user_message)
-        if politica_texto:
-            set_transient_context(chat_id, politica_texto)
+    contexto_recuperado, productos_recuperados = classify_intent(user_message)
+    if contexto_recuperado:
+        set_transient_context(chat_id, contexto_recuperado)
+    if productos_recuperados:
+        # Solo sobrescribimos si encontramos algo nuevo, garantizando continuidad
+        update_last_viewed_products(chat_id, productos_recuperados)
 
     # Obtenemos la sesión actualizada después de la búsqueda
     session = get_or_create_session(chat_id)
