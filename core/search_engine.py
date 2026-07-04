@@ -69,7 +69,7 @@ def buscador_productos(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL
         if len(resultados) >= NProductos:
             break
 
-    return resultados
+    return resultados, cumple_restricciones(catalogo_resultados[orden_productos[0]], restricciones)
 
 def buscador_politicas(mensaje, umbral = UMBRAL_POLITICAS):
     embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)

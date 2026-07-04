@@ -103,7 +103,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_logger.info(f"[ChatID: {chat_id}] 3. Generando respuesta con Gemini...")
     start_time_llm = time.perf_counter()
     respuesta_llm = await generate_response(prompt_maestro)
-    
+    user_logger.info(f"[ChatID: {chat_id}] Respuesta Novac: {respuesta_llm}")
     end_time_llm = time.perf_counter()
     latencia_llm = (end_time_llm - start_time_llm) * 1000
     user_logger.info(f"[ChatID: {chat_id}] 4. Latencia Inferencia LLM: {latencia_llm:.2f} ms")
