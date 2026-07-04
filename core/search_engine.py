@@ -47,14 +47,22 @@ def cumple_restricciones(producto: dict, restricciones: dict) -> bool:
     return True
 
 
-def buscador_productos(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL_PRODUCTOS):
+def _rankear_productos(mensaje):
+    """
+    Calcula el ranking híbrido completo de productos para un mensaje.
+    Función interna: la usan tanto buscador_productos (interfaz simple)
+    como buscar_productos_con_diagnostico (para classify_intent).
+    """
     embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)
     similitudes_semanticas = util.cos_sim(embedding_mensaje, embeddings_productos)[0]
     tokens_consulta = tokenizar(mensaje)
-
     puntajes = puntaje_hibrido(similitudes_semanticas, tokens_consulta, tokens_productos)
     orden_productos = sorted(range(len(puntajes)), key=lambda i: puntajes[i], reverse=True)
+    return orden_productos, puntajes
 
+
+def buscador_productos(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL_PRODUCTOS):
+    orden_productos, puntajes = _rankear_productos(mensaje)
     restricciones = extraer_restricciones(mensaje)
 
     resultados = []
@@ -69,7 +77,35 @@ def buscador_productos(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL
         if len(resultados) >= NProductos:
             break
 
-    return resultados, cumple_restricciones(catalogo_resultados[orden_productos[0]], restricciones)
+    return resultados
+
+
+def buscar_productos_con_diagnostico(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL_PRODUCTOS):
+    """
+    Igual que buscador_productos, pero además indica SI hubo candidatos
+    semánticamente relevantes que quedaron descartados solo por las
+    restricciones explícitas (marca/color/talla/precio). Esto permite
+    diferenciar "no hay nada relacionado con la consulta" de "sí existe
+    la categoría, pero ningún producto cumple lo que pidió el cliente".
+    """
+    orden_productos, puntajes = _rankear_productos(mensaje)
+    restricciones = extraer_restricciones(mensaje)
+
+    candidatos_relevantes = [idx for idx in orden_productos if puntajes[idx] >= umbral]
+
+    resultados = []
+    for idx in candidatos_relevantes:
+        if cumple_restricciones(catalogo_resultados[idx], restricciones):
+            resultados.append(catalogo_resultados[idx])
+            if len(resultados) >= NProductos:
+                break
+
+    return {
+        "productos": resultados,
+        "hubo_candidatos_relevantes": bool(candidatos_relevantes),
+        "descartado_por_restriccion": bool(candidatos_relevantes) and not resultados,
+        "restricciones": restricciones,
+    }
 
 def buscador_politicas(mensaje, umbral = UMBRAL_POLITICAS):
     embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)
@@ -137,10 +173,24 @@ def classify_intent(user_message: str):
         return contexto, []
 
     # 2. Prioridad Media: Búsqueda de productos en el catálogo
-    productos_encontrados = buscador_productos(msg, NProductos=PRODUCTOS_CONSULTA, umbral=UMBRAL_PRODUCTOS)
-    if productos_encontrados:
-        contexto += f"B. Productos atingentes a la petición:\n{format_retrieved_products(productos_encontrados)}\n"
-        return contexto, productos_encontrados
+    diagnostico = buscar_productos_con_diagnostico(msg, NProductos=PRODUCTOS_CONSULTA, umbral=UMBRAL_PRODUCTOS)
+
+    if diagnostico["productos"]:
+        contexto += f"B. Productos atingentes a la petición:\n{format_retrieved_products(diagnostico['productos'])}\n"
+        return contexto, diagnostico["productos"]
+
+    if diagnostico["descartado_por_restriccion"]:
+        restricciones_detectadas = ", ".join(
+            f"{clave}={valor}" for clave, valor in diagnostico["restricciones"].items() if valor
+        )
+        contexto_sin_stock = (
+            "IMPORTANTE: SÍ existen productos relacionados con la categoría que pide el cliente, "
+            "pero NINGUNO cumple con las restricciones específicas que mencionó "
+            f"({restricciones_detectadas}). Esto es información real y confirmada, NO una falta de "
+            "datos: comunícale directamente al cliente que no hay stock con esas características "
+            "exactas (nunca respondas como si no tuvieras la información)."
+        )
+        return contexto_sin_stock, []
 
     # 3. Prioridad Baja: Saludos y continuidad
     return "No hay información relevante para la petición. Responder con un saludo o mensaje cordial y ofrecer ayuda adicional.", []

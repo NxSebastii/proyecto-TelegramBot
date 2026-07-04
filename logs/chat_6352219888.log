@@ -150,3 +150,91 @@
 2026-07-04 18:13:00,105 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 6069.22 ms
 2026-07-04 18:13:00,951 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6973.70 ms
 2026-07-04 18:13:00,951 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:44:15,862 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:44:15,862 - [ChatID: 6352219888] 1. Recepción: 'Muéstrame opciones para caminar en la ciudad'
+2026-07-04 18:48:48,560 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:48:48,560 - [ChatID: 6352219888] 1. Recepción: 'Muéstrame opciones para caminar en ciudad'
+2026-07-04 18:48:48,730 - [ChatID: 6352219888] 2. Latencia RAG: 174.49 ms
+2026-07-04 18:48:48,730 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:48:52,237 - [ChatID: 6352219888] Respuesta Novac: ¡Claro! Aquí tienes algunas opciones de zapatillas ideales para caminar en la ciudad:
+
+• <b>Skechers Go Walk Flex</b>
+- <b>Precio:</b> $74990
+- <b>Tallas disponibles:</b> 37, 38, 39, 40, 41, 42, 43
+- Es una zapatilla muy liviana y cómoda, perfecta para caminatas largas y para el uso diario.
+
+• <b>Adidas Runfalcon</b>
+- <b>Precio:</b> $69990
+- <b>Tallas disponibles:</b> 38, 39, 40, 41, 42, 43
+- Una opción económica, ideal para caminata, trote suave y uso cotidiano en la ciudad.
+
+• <b>Skechers Arch Fit</b>
+- <b>Precio:</b> $89990
+- <b>Tallas disponibles:</b> 38, 39, 40, 41, 42, 43
+- Esta zapatilla cuenta con soporte de arco, diseñada para quienes caminan largas distancias y buscan mayor apoyo.
+
+Si tienes alguna otra duda o quieres ver más detalles de alguna en particular, ¡solo dímelo! 🚀
+2026-07-04 18:48:52,237 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3506.45 ms
+2026-07-04 18:48:53,095 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4543.20 ms
+2026-07-04 18:48:53,095 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:49:19,094 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:49:19,094 - [ChatID: 6352219888] 1. Recepción: 'Las terceras están en talla 37?'
+2026-07-04 18:49:19,167 - [ChatID: 6352219888] 2. Latencia RAG: 50.25 ms
+2026-07-04 18:49:19,167 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:49:23,130 - [ChatID: 6352219888] Respuesta Novac: Las <b>Skechers Arch Fit</b> no están disponibles en talla 37 en este momento, solo contamos con stock desde la 38. 💡
+2026-07-04 18:49:23,130 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3973.56 ms
+2026-07-04 18:49:23,979 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4878.82 ms
+2026-07-04 18:49:23,979 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:49:32,508 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:49:32,508 - [ChatID: 6352219888] 1. Recepción: 'Y cuáles tienen talla 37?'
+2026-07-04 18:49:32,555 - [ChatID: 6352219888] 2. Latencia RAG: 50.02 ms
+2026-07-04 18:49:32,555 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:49:35,331 - [ChatID: 6352219888] Respuesta Novac: ¡Claro! Aquí tienes las opciones que tenemos en talla 37:
+
+• <b>Converse Chuck Taylor</b>
+- <b>Precio:</b> $69990
+- Es una zapatilla de lona clásica para un estilo casual y urbano.
+
+• <b>Vans Old Skool</b>
+- <b>Precio:</b> $74990
+- Esta zapatilla urbana es resistente para uso diario y tiene un estilo skater.
+
+• <b>Adidas Advantage Base</b>
+- <b>Precio:</b> $79990
+- Una zapatilla blanca de estilo clásico para uso diario y combinaciones casuales.
+
+Si quieres saber más detalles de alguna o tienes otra consulta, ¡estoy aquí para ayudarte! 💡
+2026-07-04 18:49:35,331 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2783.49 ms
+2026-07-04 18:49:36,178 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3683.05 ms
+2026-07-04 18:49:36,178 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:50:02,213 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:50:02,213 - [ChatID: 6352219888] 1. Recepción: 'Cuales son las zapatillas más baratas de esas?'
+2026-07-04 18:50:02,271 - [ChatID: 6352219888] 2. Latencia RAG: 53.20 ms
+2026-07-04 18:50:02,271 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:50:17,924 - [ChatID: 6352219888] Respuesta Novac: De las zapatillas que tienen talla 37 y te había mencionado, la <b>Adidas Advantage Base</b> es la que tenemos disponible actualmente a un <b>precio de:</b> $79990.
+
+Esta zapatilla blanca tiene un estilo clásico, ideal para uso diario y combinaciones casuales. 💡
+2026-07-04 18:50:17,924 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 15657.51 ms
+2026-07-04 18:50:19,110 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 16895.56 ms
+2026-07-04 18:50:19,110 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:50:31,337 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:50:31,337 - [ChatID: 6352219888] 1. Recepción: 'Quiero a menor precio'
+2026-07-04 18:50:31,397 - [ChatID: 6352219888] 2. Latencia RAG: 55.47 ms
+2026-07-04 18:50:31,397 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:50:35,946 - [ChatID: 6352219888] Respuesta Novac: ¡Claro! En este momento, te puedo ofrecer la <b>Crema Hidratante CeraVe</b> a un <b>precio de:</b> $14990.
+
+Esta crema es ideal para rostro y cuerpo, y está formulada para pieles normales a secas. La tenemos disponible en formato de 340g. 💡
+2026-07-04 18:50:35,946 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 4550.56 ms
+2026-07-04 18:50:36,795 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 5465.01 ms
+2026-07-04 18:50:36,795 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:50:45,616 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:50:45,616 - [ChatID: 6352219888] 1. Recepción: 'Zapatillas a menor precio'
+2026-07-04 18:50:45,668 - [ChatID: 6352219888] 2. Latencia RAG: 42.13 ms
+2026-07-04 18:50:45,668 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:50:48,949 - [ChatID: 6352219888] Respuesta Novac: ¡Claro! La zapatilla a menor precio que te puedo ofrecer es la <b>Fila Racer Move</b>.
+
+Su <b>precio:</b> $49990.
+Es una zapatilla económica ideal para uso deportivo ligero y caminata casual. La tenemos disponible en tallas 38, 39, 40, 41 y 42. 👟
+2026-07-04 18:50:48,949 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3278.73 ms
+2026-07-04 18:50:49,828 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4209.18 ms
+2026-07-04 18:50:49,828 - [ChatID: 6352219888] ------------------------------------------
