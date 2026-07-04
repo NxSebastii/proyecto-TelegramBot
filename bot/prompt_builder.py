@@ -1,7 +1,7 @@
 # bot/prompt_builder.py
 from core.search_engine import format_retrieved_products, buscador_productos, PRODUCTOS_CONSULTA, UMBRAL_PRODUCTOS
 
-def build_final_prompt(user_message: str, chat_history: list, products_list: list, transient_context: str) -> str:
+def build_final_prompt(user_message: str, chat_history: list, transient_context: str) -> str:
     """Ensambla el historial, los productos, las políticas y el mensaje en un Prompt Maestro."""
     
     # 1. Formateamos el historial
@@ -24,9 +24,14 @@ def build_final_prompt(user_message: str, chat_history: list, products_list: lis
         f"{transient_text}"
         f"---------------------\n"
         f"NUEVO MENSAJE DEL CLIENTE: {user_message}\n\n"
-        f"INSTRUCCIÓN OBLIGATORIA: Redacta tu respuesta basándote EXCLUSIVAMENTE en el Catálogo "
+        f"INSTRUCCIÓN OBLIGATORIA: Redacta tu respuesta basándote EXCLUSIVAMENTE en el Catálogo. Utiliza la descripción de forma NATURAL en la conversación, NO HAGAS LISTADOS CON LOS DETALLES DE LOS PRODUCTOS."
         f"Recuperado y la Información Operativa proporcionada arriba. Si la respuesta no está "
         f"en este texto, indica que no tienes la información."
+        f"Entrega la información de forma integrada en la conversación, enfocándose más en el diálogo que en la enumeración de productos."
+        f"Para consultas generales, referencia incialmente solo el nombre de los productos recuperados. "
+        f"En caso de pedir detalles, proporciona la información específica solicitada. Si se piden detalles en general, completa de cada producto. "
+        f"Si el cliente hace referencia a un producto específico, usa la lista numerada para identificarlo. "
+        f"En caso de realizarse multiples preguntas, preocupate de responder cada una en su propio mérito."
     )
     
     return prompt_maestro

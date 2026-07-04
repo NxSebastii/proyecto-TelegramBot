@@ -95,7 +95,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     prompt_maestro = build_final_prompt(
         user_message=user_message,
         chat_history=session["chat_history"],
-        products_list=session["last_viewed_products"],
+        #products_list=session["last_viewed_products"],
         transient_context=session["transient_context"]
     )
 

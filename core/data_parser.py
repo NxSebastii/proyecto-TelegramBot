@@ -1,5 +1,6 @@
 #data parser
 import pickle
+import re
 
 from sentence_transformers import SentenceTransformer, util
 import json
@@ -11,9 +12,14 @@ RUTA_POLITICAS = os.path.join(os.path.dirname(__file__), "../data/politicas.json
 RUTA_EMBEDDINGS = os.path.join(os.path.dirname(__file__), "../data/embeddings.pkl")
 
 
-UMBRAL_PRODUCTOS = 0.10
-UMBRAL_POLITICAS = 0.30
-PRODUCTOS_CONSULTA = 5
+UMBRAL_PRODUCTOS = 0.07
+UMBRAL_POLITICAS = 0.20
+PRODUCTOS_CONSULTA = 3
+
+# Ponderación de la búsqueda híbrida: cuánto pesa la similitud semántica
+# (embeddings) vs. la coincidencia literal de palabras clave. Deben sumar 1.0.
+PESO_SEMANTICO = 0.7
+PESO_PALABRA_CLAVE = 0.3
 
 def product_data(producto):
     """
@@ -51,6 +57,10 @@ def construir_texto_politica(policy_text):
     """
     return f"Tema: {policy_text.get('tema', '')}. {policy_text.get('contenido', '')}"
 
+def tokenizar(texto):
+    """Extrae el conjunto de palabras (en minúscula, sin puntuación) de un texto."""
+    return set(re.findall(r"\w+", texto.lower()))
+
 with open(RUTA_PRODUCTOS, encoding="utf-8") as f:
     productos = json.load(f)
 
@@ -65,6 +75,11 @@ textos_embedding_politicas = [construir_texto_politica(p) for p in politicas]
 # Datos estructurados que se devuelven al usuario (mismo orden/índice que arriba)
 catalogo_resultados = [product_data(p) for p in productos]
 politicas_resultados = [policy_data(p) for p in politicas]
+
+# Tokens precalculados de cada ítem, usados por la parte de palabra clave
+# de la búsqueda híbrida (mismo orden/índice que las listas de arriba)
+tokens_productos = [tokenizar(t) for t in textos_embedding_productos]
+tokens_politicas = [tokenizar(t) for t in textos_embedding_politicas]
 
 def generar_embeddings():
     if os.path.exists(RUTA_EMBEDDINGS):

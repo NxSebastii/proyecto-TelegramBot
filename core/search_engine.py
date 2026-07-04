@@ -1,27 +1,87 @@
-from data_parser import *
+from core.data_parser import *
+from core.filtros import extraer_restricciones, TOLERANCIA_PRECIO_APROXIMADO
+
+def puntaje_hibrido(similitudes_semanticas, tokens_consulta, tokens_corpus):
+    """
+    Combina, ítem por ítem, la similitud semántica (embeddings) con la
+    proporción de palabras de la consulta que aparecen literalmente en el
+    texto del ítem (palabra clave). El resultado es un puntaje ponderado
+    por PESO_SEMANTICO / PESO_PALABRA_CLAVE.
+    """
+    puntajes = []
+    for idx, tokens_item in enumerate(tokens_corpus):
+        score_semantico = similitudes_semanticas[idx].item()
+        coincidencias = tokens_consulta & tokens_item
+        score_palabra_clave = len(coincidencias) / len(tokens_consulta) if tokens_consulta else 0.0
+        puntajes.append(PESO_SEMANTICO * score_semantico + PESO_PALABRA_CLAVE * score_palabra_clave)
+    return puntajes
+
+
+def cumple_restricciones(producto: dict, restricciones: dict) -> bool:
+    """
+    Retorna True si el producto cumple TODAS las restricciones explícitas
+    detectadas en la consulta. Una restricción en None significa que el
+    usuario no la mencionó, así que no se filtra por ese campo.
+    """
+    if restricciones["marca"] and producto["marca"].lower() != restricciones["marca"]:
+        return False
+
+    if restricciones["color"]:
+        colores_producto = [c.lower() for c in producto.get("colores", [])]
+        if restricciones["color"] not in colores_producto:
+            return False
+
+    if restricciones["talla"] and restricciones["talla"] not in producto.get("tallas", []):
+        return False
+
+    if restricciones["precio_valor"] is not None:
+        precio = producto["precio"]
+        if restricciones["precio_es_maximo"]:
+            if precio > restricciones["precio_valor"]:
+                return False
+        else:
+            tolerancia = restricciones["precio_valor"] * TOLERANCIA_PRECIO_APROXIMADO
+            if abs(precio - restricciones["precio_valor"]) > tolerancia:
+                return False
+
+    return True
+
 
 def buscador_productos(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL_PRODUCTOS):
     embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)
-    # Comparar con embeddings de productos
-    similitudes_productos = util.cos_sim(embedding_mensaje, embeddings_productos)[0]
-    orden_productos = similitudes_productos.argsort(descending=True)
+    similitudes_semanticas = util.cos_sim(embedding_mensaje, embeddings_productos)[0]
+    tokens_consulta = tokenizar(mensaje)
+
+    puntajes = puntaje_hibrido(similitudes_semanticas, tokens_consulta, tokens_productos)
+    orden_productos = sorted(range(len(puntajes)), key=lambda i: puntajes[i], reverse=True)
+
+    restricciones = extraer_restricciones(mensaje)
 
     resultados = []
-    for idx in orden_productos[:NProductos]:
-        if similitudes_productos[idx] >= umbral:
-            resultados.append(catalogo_resultados[idx])
-        else:
+    for idx in orden_productos:
+        if puntajes[idx] < umbral:
+            break  # el resto del orden tiene aún menos puntaje, no hay más candidatos válidos
+
+        if not cumple_restricciones(catalogo_resultados[idx], restricciones):
+            continue  # relevante semánticamente, pero no cumple una restricción explícita
+
+        resultados.append(catalogo_resultados[idx])
+        if len(resultados) >= NProductos:
             break
+
     return resultados
 
 def buscador_politicas(mensaje, umbral = UMBRAL_POLITICAS):
-    # Comparar con embeddings de políticas
     embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)
-    similitudes_politicas = util.cos_sim(embedding_mensaje, embeddings_politicas)[0]
-    orden_politicas = similitudes_politicas.argsort(descending=True)
+    similitudes_semanticas = util.cos_sim(embedding_mensaje, embeddings_politicas)[0]
+    tokens_consulta = tokenizar(mensaje)
+
+    puntajes = puntaje_hibrido(similitudes_semanticas, tokens_consulta, tokens_politicas)
+    orden_politicas = sorted(range(len(puntajes)), key=lambda i: puntajes[i], reverse=True)
+
     resultados = []
     for idx in orden_politicas:
-        if similitudes_politicas[idx] >= umbral:
+        if puntajes[idx] >= umbral:
             resultados.append(politicas_resultados[idx])
         else:
             break

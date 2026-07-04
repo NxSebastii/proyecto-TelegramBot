@@ -1,0 +1,35 @@
+2026-07-02 23:28:46,663 - [ChatID: 8638840759] ------------------------------------------
+2026-07-02 23:28:46,664 - [ChatID: 8638840759] 1. Recepción: 'hola'
+2026-07-02 23:28:46,707 - [ChatID: 8638840759] 2. Latencia RAG: 43.65 ms
+2026-07-02 23:28:46,708 - [ChatID: 8638840759] 3. Generando respuesta con Gemini...
+2026-07-02 23:28:50,952 - [ChatID: 8638840759] 4. Latencia Inferencia LLM: 4243.85 ms
+2026-07-02 23:28:51,318 - [ChatID: 8638840759] 5. Latencia TOTAL End-to-End: 4653.54 ms
+2026-07-02 23:28:51,318 - [ChatID: 8638840759] ------------------------------------------
+2026-07-02 23:29:37,118 - [ChatID: 8638840759] ------------------------------------------
+2026-07-02 23:29:37,119 - [ChatID: 8638840759] 1. Recepción: 'qué tienes de ropa para hacer deporte?'
+2026-07-02 23:29:37,191 - [ChatID: 8638840759] 2. Latencia RAG: 71.63 ms
+2026-07-02 23:29:37,191 - [ChatID: 8638840759] 3. Generando respuesta con Gemini...
+2026-07-02 23:29:40,154 - [ChatID: 8638840759] 4. Latencia Inferencia LLM: 2962.85 ms
+2026-07-02 23:29:41,069 - [ChatID: 8638840759] 5. Latencia TOTAL End-to-End: 3952.08 ms
+2026-07-02 23:29:41,070 - [ChatID: 8638840759] ------------------------------------------
+2026-07-02 23:30:37,969 - [ChatID: 8638840759] ------------------------------------------
+2026-07-02 23:30:37,969 - [ChatID: 8638840759] 1. Recepción: 'me gustaría ver los detalles de la quinta opción'
+2026-07-02 23:30:38,039 - [ChatID: 8638840759] 2. Latencia RAG: 69.75 ms
+2026-07-02 23:30:38,039 - [ChatID: 8638840759] 3. Generando respuesta con Gemini...
+2026-07-02 23:30:40,127 - [ChatID: 8638840759] 4. Latencia Inferencia LLM: 2087.53 ms
+2026-07-02 23:30:40,978 - [ChatID: 8638840759] 5. Latencia TOTAL End-to-End: 3009.64 ms
+2026-07-02 23:30:40,978 - [ChatID: 8638840759] ------------------------------------------
+2026-07-02 23:31:04,416 - [ChatID: 8638840759] ------------------------------------------
+2026-07-02 23:31:04,416 - [ChatID: 8638840759] 1. Recepción: 'qué tallas tienes disponibles? si no me queda la puedo cambiar?'
+2026-07-02 23:31:04,481 - [ChatID: 8638840759] 2. Latencia RAG: 64.31 ms
+2026-07-02 23:31:04,481 - [ChatID: 8638840759] 3. Generando respuesta con Gemini...
+2026-07-02 23:31:08,468 - [ChatID: 8638840759] 4. Latencia Inferencia LLM: 3987.19 ms
+2026-07-02 23:31:09,329 - [ChatID: 8638840759] 5. Latencia TOTAL End-to-End: 4913.21 ms
+2026-07-02 23:31:09,329 - [ChatID: 8638840759] ------------------------------------------
+2026-07-02 23:31:28,563 - [ChatID: 8638840759] ------------------------------------------
+2026-07-02 23:31:28,563 - [ChatID: 8638840759] 1. Recepción: 'estas seguro, cual es tu política sobre cambios y devoluciones?'
+2026-07-02 23:31:28,628 - [ChatID: 8638840759] 2. Latencia RAG: 64.67 ms
+2026-07-02 23:31:28,628 - [ChatID: 8638840759] 3. Generando respuesta con Gemini...
+2026-07-02 23:31:32,157 - [ChatID: 8638840759] 4. Latencia Inferencia LLM: 3528.15 ms
+2026-07-02 23:31:33,011 - [ChatID: 8638840759] 5. Latencia TOTAL End-to-End: 4448.02 ms
+2026-07-02 23:31:33,011 - [ChatID: 8638840759] ------------------------------------------
