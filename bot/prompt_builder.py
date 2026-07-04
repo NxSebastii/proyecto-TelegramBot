@@ -28,8 +28,6 @@ def build_final_prompt(user_message: str, chat_history: list, transient_context:
         f"Recuperado y la Información Operativa proporcionada arriba. Si la respuesta no está "
         f"en este texto, indica que no tienes la información."
         f"Entrega la información de forma integrada en la conversación, enfocándose más en el diálogo que en la enumeración de productos."
-        f"Para consultas generales, referencia incialmente solo el nombre de los productos recuperados. "
-        f"En caso de pedir detalles, proporciona la información específica solicitada. Si se piden detalles en general, completa de cada producto. "
         f"Si el cliente hace referencia a un producto específico, usa la lista numerada para identificarlo. "
         f"En caso de realizarse multiples preguntas, preocupate de responder cada una en su propio mérito."
     )
