@@ -8,7 +8,8 @@ from telegram.constants import ParseMode
 
 from bot.memory import (
     get_or_create_session, add_message_to_history,
-    update_last_viewed_products, set_transient_context, clear_transient_context
+    update_last_viewed_products, update_last_viewed_policies,
+    set_transient_context, clear_transient_context
 )
 from core.search_engine import classify_intent
 from bot.prompt_builder import build_final_prompt
@@ -17,6 +18,55 @@ from bot.llm_client import generate_response
 
 # Importamos el token desde nuestro archivo de configuración
 from config import TELEGRAM_TOKEN
+
+# Palabras que indican que el cliente se refiere a un producto ya mostrado
+# ("nikes parecidas", "algo similar", "tipo esa") sin repetir su categoría.
+# Estas SÍ ameritan una búsqueda nueva (enriquecida con la categoría anterior).
+PALABRAS_REFERENCIA_ANTERIOR = [
+    "parecid", "similar", "como esa", "como esas", "como ese", "como esos",
+    "otro como", "otra como", "algo así", "tipo esa", "tipo ese"
+]
+
+# Palabras que indican una comparación/selección sobre productos YA
+# mostrados ("el más barato", "el primero", "el segundo"). Estas NO
+# necesitan una búsqueda nueva en el catálogo — es una operación simple
+# sobre datos que ya tenemos. Buscar de nuevo solo introduce ruido (ej.
+# "quiero la más barata" puede matchear con cualquier producto barato del
+# catálogo completo, ignorando las zapatillas Nike que se venían mostrando).
+PALABRAS_REFERENCIA_COMPARATIVA = [
+    "más barat", "mas barat", "más car", "mas car", "económic", "economic",
+    "mejor precio", "el primero", "el segundo", "el tercero", "el último", "el ultimo"
+]
+
+def es_referencia_comparativa(user_message: str) -> bool:
+    msg = user_message.lower()
+    return any(palabra in msg for palabra in PALABRAS_REFERENCIA_COMPARATIVA)
+
+def construir_consulta_busqueda(user_message: str, productos_recientes: list) -> str:
+    """
+    La búsqueda semántica solo ve el mensaje actual, no el historial. Si el
+    cliente dice "nike parecida" sin mencionar la categoría (zapatillas),
+    la búsqueda no tiene forma de saber a qué se refiere "parecida". Para
+    esos casos, se le agrega a la consulta (solo para efectos de búsqueda,
+    NO se altera lo que ve el LLM) la CATEGORÍA del último producto visto.
+
+    Importante: solo se agrega la categoría, NUNCA el nombre del producto
+    completo — si el último producto visto es de otra marca (ej. Converse)
+    y el cliente ahora pide "nike parecida", meter "Converse Chuck Taylor"
+    en la consulta contamina el ranking semántico con una marca competidora
+    y puede hacer que los Nike reales no puntúen lo suficiente.
+    """
+    if not productos_recientes:
+        return user_message
+
+    msg = user_message.lower()
+    if not any(palabra in msg for palabra in PALABRAS_REFERENCIA_ANTERIOR):
+        return user_message
+
+    ultimo_producto = productos_recientes[-1]
+    categoria = ultimo_producto.get('categoria', '')
+    return f"{user_message} {categoria}" if categoria else user_message
+
 
 def get_user_logger(chat_id: int):
     # Aseguramos que la carpeta de logs exista
@@ -76,12 +126,16 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # 2. Enrutador + Recuperación Dirigida (RAG) — ahora unificados en classify_intent
     start_time_rag = time.perf_counter()
 
-    contexto_recuperado, productos_recuperados = classify_intent(user_message)
+    contexto_recuperado, productos_recuperados, politicas_recuperadas = classify_intent(
+        construir_consulta_busqueda(user_message, session["last_viewed_products"])
+    )
     if contexto_recuperado:
         set_transient_context(chat_id, contexto_recuperado)
     if productos_recuperados:
         # Solo sobrescribimos si encontramos algo nuevo, garantizando continuidad
         update_last_viewed_products(chat_id, productos_recuperados)
+    if politicas_recuperadas:
+        update_last_viewed_policies(chat_id, politicas_recuperadas)
 
     # Obtenemos la sesión actualizada después de la búsqueda
     session = get_or_create_session(chat_id)
@@ -96,6 +150,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         user_message=user_message,
         chat_history=session["chat_history"],
         productos_recientes=session["last_viewed_products"],
+        politicas_recientes=session["last_viewed_policies"],
         transient_context=session["transient_context"]
     )
 

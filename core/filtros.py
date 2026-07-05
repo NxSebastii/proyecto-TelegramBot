@@ -2,6 +2,58 @@ import re
 import json
 import os
 
+def generar_variantes(color: str) -> set[str]:
+    """
+    Genera automáticamente variantes morfológicas simples de un color.
+    Ej:
+        negro -> negro, negra, negros, negras
+        gris  -> gris, grises
+        café  -> café, cafés
+        azul  -> azul, azules
+    """
+    color = color.lower()
+    variantes = {color}
+
+    if color.endswith("o"):
+        raiz = color[:-1]
+        variantes |= {
+            raiz + "o",
+            raiz + "a",
+            raiz + "os",
+            raiz + "as",
+        }
+
+    elif color.endswith(("e", "é")):
+        variantes.add(color + "s")
+
+    elif color.endswith(("l", "n", "r")):
+        variantes.add(color + "es")
+
+    elif color.endswith("z"):
+        variantes.add(color[:-1] + "ces")
+
+    elif color.endswith("s"):
+        variantes.add(color + "es")
+
+    else:
+        variantes.add(color + "s")
+
+    return variantes
+
+
+def construir_mapa_colores(colores):
+    """
+    Construye un diccionario:
+        variante -> color_canónico
+    """
+    mapa = {}
+
+    for color in colores:
+        for variante in generar_variantes(color):
+            mapa[variante] = color
+
+    return mapa
+
 RUTA_PRODUCTOS = os.path.join(os.path.dirname(__file__), "../data/productos.json")
 RUTA_POLITICAS = os.path.join(os.path.dirname(__file__), "../data/politicas.json")
 RUTA_EMBEDDINGS = os.path.join(os.path.dirname(__file__), "../data/embeddings.pkl")
@@ -11,8 +63,13 @@ with open(RUTA_PRODUCTOS, encoding="utf-8") as f:
 with open(RUTA_POLITICAS, encoding="utf-8") as f:
     politicas = json.load(f)
 marcas_disponibles = sorted({p.get("marca", "").lower() for p in productos if p.get("marca")})
-colores_disponibles = sorted({c.lower() for p in productos for c in p.get("colores", [])})
+colores_disponibles = sorted({
+    c.lower()
+    for p in productos
+    for c in p.get("colores", [])
+})
 
+mapa_colores = construir_mapa_colores(colores_disponibles)
 PALABRAS_ABSOLUTAS = ["menos de", "máximo", "maximo", "hasta", "bajo", "por menos de", "no más de"]
 
 # Tolerancia usada cuando el precio detectado NO viene acompañado de una
@@ -30,11 +87,20 @@ def extraer_marca(msg: str):
 
 
 def extraer_color(msg: str):
-    """Retorna el color detectado (en minúscula) o None si no se menciona ninguno."""
-    msg = msg.lower()
-    for color in colores_disponibles:
-        if color in msg:
-            return color
+    """
+    Retorna el color canónico detectado o None.
+    Acepta variantes como:
+        negro, negra, negros, negras,
+        gris, grises,
+        café, cafés,
+        azul, azules...
+    """
+    palabras = re.findall(r"\w+", msg.lower())
+
+    for palabra in palabras:
+        if palabra in mapa_colores:
+            return mapa_colores[palabra]
+
     return None
 
 

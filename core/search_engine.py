@@ -50,8 +50,6 @@ def cumple_restricciones(producto: dict, restricciones: dict) -> bool:
 def _rankear_productos(mensaje):
     """
     Calcula el ranking híbrido completo de productos para un mensaje.
-    Función interna: la usan tanto buscador_productos (interfaz simple)
-    como buscar_productos_con_diagnostico (para classify_intent).
     """
     embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)
     similitudes_semanticas = util.cos_sim(embedding_mensaje, embeddings_productos)[0]
@@ -61,17 +59,34 @@ def _rankear_productos(mensaje):
     return orden_productos, puntajes
 
 
+def _rankear_politicas(mensaje):
+    """
+    Calcula el ranking híbrido completo de políticas para un mensaje.
+    """
+    embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)
+    similitudes_semanticas = util.cos_sim(embedding_mensaje, embeddings_politicas)[0]
+    tokens_consulta = tokenizar(mensaje)
+    puntajes = puntaje_hibrido(similitudes_semanticas, tokens_consulta, tokens_politicas)
+    orden_politicas = sorted(range(len(puntajes)), key=lambda i: puntajes[i], reverse=True)
+    return orden_politicas, puntajes
+
+
 def buscador_productos(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL_PRODUCTOS):
+    """
+    Interfaz simple: SIEMPRE retorna una lista de productos (posiblemente
+    vacía). La usan telegram_app.py y cualquier otro lugar que solo
+    necesite los resultados, sin el diagnóstico de restricciones.
+    """
     orden_productos, puntajes = _rankear_productos(mensaje)
     restricciones = extraer_restricciones(mensaje)
 
     resultados = []
     for idx in orden_productos:
         if puntajes[idx] < umbral:
-            break  # el resto del orden tiene aún menos puntaje, no hay más candidatos válidos
+            break
 
         if not cumple_restricciones(catalogo_resultados[idx], restricciones):
-            continue  # relevante semánticamente, pero no cumple una restricción explícita
+            continue
 
         resultados.append(catalogo_resultados[idx])
         if len(resultados) >= NProductos:
@@ -82,15 +97,18 @@ def buscador_productos(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL
 
 def buscar_productos_con_diagnostico(mensaje, NProductos = PRODUCTOS_CONSULTA, umbral = UMBRAL_PRODUCTOS):
     """
-    Igual que buscador_productos, pero además indica SI hubo candidatos
-    semánticamente relevantes que quedaron descartados solo por las
-    restricciones explícitas (marca/color/talla/precio). Esto permite
-    diferenciar "no hay nada relacionado con la consulta" de "sí existe
-    la categoría, pero ningún producto cumple lo que pidió el cliente".
+    Igual que buscador_productos, pero además informa:
+      - puntaje_maximo: el mejor puntaje híbrido obtenido (0.0 si el
+        catálogo está vacío), usado por classify_intent para comparar
+        contra el puntaje de políticas y decidir cuál rama es más relevante.
+      - hubo_candidatos_relevantes / descartado_por_restriccion: para
+        diferenciar "no hay nada relacionado" de "hay categoría pero nada
+        cumple las restricciones explícitas".
     """
     orden_productos, puntajes = _rankear_productos(mensaje)
     restricciones = extraer_restricciones(mensaje)
 
+    puntaje_maximo = puntajes[orden_productos[0]] if orden_productos else 0.0
     candidatos_relevantes = [idx for idx in orden_productos if puntajes[idx] >= umbral]
 
     resultados = []
@@ -102,18 +120,15 @@ def buscar_productos_con_diagnostico(mensaje, NProductos = PRODUCTOS_CONSULTA, u
 
     return {
         "productos": resultados,
+        "puntaje_maximo": puntaje_maximo,
         "hubo_candidatos_relevantes": bool(candidatos_relevantes),
         "descartado_por_restriccion": bool(candidatos_relevantes) and not resultados,
         "restricciones": restricciones,
     }
 
-def buscador_politicas(mensaje, umbral = UMBRAL_POLITICAS):
-    embedding_mensaje = model.encode(mensaje, convert_to_tensor=True)
-    similitudes_semanticas = util.cos_sim(embedding_mensaje, embeddings_politicas)[0]
-    tokens_consulta = tokenizar(mensaje)
 
-    puntajes = puntaje_hibrido(similitudes_semanticas, tokens_consulta, tokens_politicas)
-    orden_politicas = sorted(range(len(puntajes)), key=lambda i: puntajes[i], reverse=True)
+def buscador_politicas(mensaje, umbral = UMBRAL_POLITICAS):
+    orden_politicas, puntajes = _rankear_politicas(mensaje)
 
     resultados = []
     for idx in orden_politicas:
@@ -127,8 +142,6 @@ def buscador_politicas(mensaje, umbral = UMBRAL_POLITICAS):
 def format_retrieved_products(products_list: list) -> str:
     """
     Convierte la lista de diccionarios de productos en texto estructurado.
-    Movida a nivel de módulo (antes vivía dentro de classify_intent) para
-    que prompt_builder.py pueda importarla sin ImportError.
     """
     if not products_list:
         return "No hay productos en el contexto actual."
@@ -136,14 +149,17 @@ def format_retrieved_products(products_list: list) -> str:
     formatted_text = "CATÁLOGO RECUPERADO (Únicos productos que puedes ofrecer):\n"
     for i, prod in enumerate(products_list):
         nombre = prod.get('nombre', 'Producto sin nombre')
+        marca = prod.get('marca', '')
         precio = prod.get('precio', 'Precio no disponible')
         tallas = prod.get('tallas', [])
+        colores = prod.get('colores', [])
         descripcion = prod.get('descripcion', '')
 
         # El formato numerado es clave para resolver referencias como "el segundo"
-        formatted_text += f"{i + 1}. Producto: {nombre}\n"
+        formatted_text += f"{i + 1}. Producto: {nombre} (Marca: {marca})\n"
         formatted_text += f"   - Precio: ${precio}\n"
         formatted_text += f"   - Tallas disponibles: {', '.join(map(str, tallas))}\n"
+        formatted_text += f"   - Colores disponibles: {', '.join(colores) if colores else 'No especificado'}\n"
         formatted_text += f"   - Descripción: {descripcion}\n\n"
 
     return formatted_text
@@ -151,10 +167,13 @@ def format_retrieved_products(products_list: list) -> str:
 def classify_intent(user_message: str):
     """
     Enrutador + recuperación en un solo paso.
-    Retorna una tupla (contexto: str, productos: list):
-      - contexto: texto ya formateado para inyectar en el prompt.
-      - productos: lista de productos recuperados (solo poblada cuando
-        gatilla la rama de catálogo; vacía en cualquier otro caso).
+    Retorna una tupla (contexto: str, productos: list, politicas: list).
+
+    En vez de darle prioridad ciega a políticas sobre productos, se compara
+    el puntaje híbrido máximo de cada rama: solo gana políticas si su mejor
+    puntaje es mayor o igual al mejor puntaje de productos. Esto evita que
+    preguntas de catálogo ("qué tienes de zapatillas") sean capturadas por
+    una política semánticamente parecida (ej. la de stock/disponibilidad).
     """
     msg = user_message.lower()
 
@@ -163,21 +182,32 @@ def classify_intent(user_message: str):
         "su petición, ordenada según la prioridad con la que se debe atender:\n\n"
     )
 
-    # 1. Prioridad Máxima: Políticas
-    politicas_encontradas = buscador_politicas(msg, umbral=UMBRAL_POLITICAS)
-    if politicas_encontradas:
-        texto_politicas = ""
-        for p in politicas_encontradas:
-            texto_politicas += f"- {p['tema']}: {p['contenido']}\n"
-        contexto += f"A. Políticas atingentes a la petición (En orden de relevancia):\n{texto_politicas}\n"
-        return contexto, []
+    orden_politicas, puntajes_politicas = _rankear_politicas(msg)
+    mejor_puntaje_politica = puntajes_politicas[orden_politicas[0]] if orden_politicas else 0.0
+    politica_relevante = mejor_puntaje_politica >= UMBRAL_POLITICAS
 
-    # 2. Prioridad Media: Búsqueda de productos en el catálogo
     diagnostico = buscar_productos_con_diagnostico(msg, NProductos=PRODUCTOS_CONSULTA, umbral=UMBRAL_PRODUCTOS)
+    producto_relevante = diagnostico["hubo_candidatos_relevantes"]
+    mejor_puntaje_producto = diagnostico["puntaje_maximo"]
 
+    usar_politica = politica_relevante and (
+        not producto_relevante or mejor_puntaje_politica >= mejor_puntaje_producto
+    )
+
+    # 1. Rama políticas (solo si de verdad es la más relevante de las dos)
+    if usar_politica:
+        politicas_encontradas = [
+            politicas_resultados[idx] for idx in orden_politicas
+            if puntajes_politicas[idx] >= UMBRAL_POLITICAS
+        ]
+        texto_politicas = "".join(f"- {p['tema']}: {p['contenido']}\n" for p in politicas_encontradas)
+        contexto += f"A. Políticas atingentes a la petición (En orden de relevancia):\n{texto_politicas}\n"
+        return contexto, [], politicas_encontradas
+
+    # 2. Rama productos
     if diagnostico["productos"]:
         contexto += f"B. Productos atingentes a la petición:\n{format_retrieved_products(diagnostico['productos'])}\n"
-        return contexto, diagnostico["productos"]
+        return contexto, diagnostico["productos"], []
 
     if diagnostico["descartado_por_restriccion"]:
         restricciones_detectadas = ", ".join(
@@ -190,7 +220,7 @@ def classify_intent(user_message: str):
             "datos: comunícale directamente al cliente que no hay stock con esas características "
             "exactas (nunca respondas como si no tuvieras la información)."
         )
-        return contexto_sin_stock, []
+        return contexto_sin_stock, [], []
 
     # 3. Prioridad Baja: Saludos y continuidad
-    return "No hay información relevante para la petición. Responder con un saludo o mensaje cordial y ofrecer ayuda adicional.", []
+    return "No hay información relevante para la petición. Responder con un saludo o mensaje cordial y ofrecer ayuda adicional.", [], []

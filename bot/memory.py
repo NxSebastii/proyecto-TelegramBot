@@ -6,9 +6,10 @@ def get_or_create_session(chat_id: str) -> dict:
     chat_id_str = str(chat_id)
     if chat_id_str not in session_state:
         session_state[chat_id_str] = {
-            "chat_history": [],          # Lista de diccionarios (rol y mensaje)
-            "last_viewed_products": [],  # Lista de productos recuperados (max 3)
-            "transient_context": ""      # Texto temporal (ej. políticas)
+            "chat_history": [],           # Lista de diccionarios (rol y mensaje)
+            "last_viewed_products": [],   # Lista de productos recuperados (max 5)
+            "last_viewed_policies": [],   # Lista de políticas recuperadas (max 3)
+            "transient_context": ""       # Texto temporal (ej. políticas)
         }
     return session_state[chat_id_str]
 
@@ -39,6 +40,23 @@ def update_last_viewed_products(chat_id: str, new_products: list):
             
     # Mantenemos solo los 5 más recientes (recortando los más viejos al inicio de la lista)
     session["last_viewed_products"] = current_products[-5:]
+
+def update_last_viewed_policies(chat_id: str, new_policies: list):
+    """
+    Añade nuevas políticas a la memoria sin borrar las anteriores,
+    evitando duplicados (por tema) y manteniendo un máximo de 3.
+    Esto permite responder preguntas de seguimiento sobre la misma política
+    ("¿cuáles son esas condiciones?") sin necesitar que la búsqueda semántica
+    la vuelva a encontrar en cada turno.
+    """
+    session = get_or_create_session(chat_id)
+    current_policies = session["last_viewed_policies"]
+
+    for new_pol in new_policies:
+        if not any(p.get("tema") == new_pol.get("tema") for p in current_policies):
+            current_policies.append(new_pol)
+
+    session["last_viewed_policies"] = current_policies[-3:]
 
 def set_transient_context(chat_id: str, context_text: str):
     """Inyecta información temporal, como un extracto del manual operativo."""

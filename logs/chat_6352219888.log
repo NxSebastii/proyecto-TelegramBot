@@ -308,3 +308,278 @@ Es una zapatilla económica ideal para uso deportivo ligero y caminata casual. L
 2026-07-04 21:14:33,235 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2349.78 ms
 2026-07-04 21:14:34,111 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3980.34 ms
 2026-07-04 21:14:34,111 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 21:27:16,044 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 21:27:16,044 - [ChatID: 6352219888] 1. Recepción: 'si'
+2026-07-04 21:27:25,806 - [ChatID: 6352219888] 2. Latencia RAG: 9746.87 ms
+2026-07-04 21:27:25,807 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 21:27:27,882 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2074.57 ms
+2026-07-04 21:27:28,723 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 12673.86 ms
+2026-07-04 21:27:28,723 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:22:08,474 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:22:08,477 - [ChatID: 6352219888] 1. Recepción: 'Muéstrame opciones para caminar en ciudad.'
+2026-07-04 22:22:12,350 - [ChatID: 6352219888] 2. Latencia RAG: 3823.16 ms
+2026-07-04 22:22:12,352 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:22:15,654 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3302.10 ms
+2026-07-04 22:22:16,514 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 8045.80 ms
+2026-07-04 22:22:16,514 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:22:36,678 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:22:36,678 - [ChatID: 6352219888] 1. Recepción: 'La segunda tiene talla 42?'
+2026-07-04 22:22:36,834 - [ChatID: 6352219888] 2. Latencia RAG: 143.16 ms
+2026-07-04 22:22:36,834 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:22:39,292 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2459.64 ms
+2026-07-04 22:22:40,136 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3451.14 ms
+2026-07-04 22:22:40,136 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:22:50,622 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:22:50,622 - [ChatID: 6352219888] 1. Recepción: 'y está en negro?'
+2026-07-04 22:22:50,664 - [ChatID: 6352219888] 2. Latencia RAG: 40.32 ms
+2026-07-04 22:22:50,665 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:22:53,209 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2543.45 ms
+2026-07-04 22:22:54,083 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3460.23 ms
+2026-07-04 22:22:54,083 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:24:05,641 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:24:05,647 - [ChatID: 6352219888] 1. Recepción: 'Si compro unas zapatillas y no me quedan, ¿puedo cambiarlas?'
+2026-07-04 22:24:06,277 - [ChatID: 6352219888] 2. Latencia RAG: 619.45 ms
+2026-07-04 22:24:06,278 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:24:09,547 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3269.27 ms
+2026-07-04 22:24:10,412 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4775.37 ms
+2026-07-04 22:24:10,412 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:26:02,050 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:26:02,050 - [ChatID: 6352219888] 1. Recepción: 'Si compro unas zapatillas y no me quedan, ¿puedo cambiarlas?'
+2026-07-04 22:26:02,353 - [ChatID: 6352219888] 2. Latencia RAG: 301.62 ms
+2026-07-04 22:26:02,353 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:26:04,523 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2175.88 ms
+2026-07-04 22:26:05,395 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3346.75 ms
+2026-07-04 22:26:05,395 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:26:29,068 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:26:29,073 - [ChatID: 6352219888] 1. Recepción: '¿Y puedo pedir devolución del dinero?'
+2026-07-04 22:26:29,272 - [ChatID: 6352219888] 2. Latencia RAG: 209.34 ms
+2026-07-04 22:26:29,272 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:26:31,440 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2157.79 ms
+2026-07-04 22:26:32,286 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3215.45 ms
+2026-07-04 22:26:32,286 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:26:52,409 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:26:52,409 - [ChatID: 6352219888] 1. Recepción: 'cuales son esas condiciones?'
+2026-07-04 22:26:52,463 - [ChatID: 6352219888] 2. Latencia RAG: 51.23 ms
+2026-07-04 22:26:52,463 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:26:59,449 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 6992.03 ms
+2026-07-04 22:27:00,310 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 7900.10 ms
+2026-07-04 22:27:00,310 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:40:15,518 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:40:15,518 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, econ´omicas y en talla 42.'
+2026-07-04 22:42:25,746 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:42:25,833 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, econ´omicas y en talla 42.'
+2026-07-04 22:42:29,353 - [ChatID: 6352219888] 2. Latencia RAG: 3513.96 ms
+2026-07-04 22:42:29,353 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:42:32,138 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2784.26 ms
+2026-07-04 22:42:33,033 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 7290.19 ms
+2026-07-04 22:42:33,033 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:48:02,496 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:48:02,496 - [ChatID: 6352219888] 1. Recepción: 'quiero zapatillas negras, económicas y en talla 42'
+2026-07-04 22:48:02,814 - [ChatID: 6352219888] 2. Latencia RAG: 311.45 ms
+2026-07-04 22:48:02,819 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:48:12,236 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 9417.50 ms
+2026-07-04 22:48:13,073 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 10567.20 ms
+2026-07-04 22:48:13,073 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:50:52,395 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:50:52,395 - [ChatID: 6352219888] 1. Recepción: 'quiero zapatillas negras, económicas y en talla 42'
+2026-07-04 22:50:53,676 - [ChatID: 6352219888] 2. Latencia RAG: 1270.66 ms
+2026-07-04 22:50:53,676 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:50:58,250 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 4574.21 ms
+2026-07-04 22:50:59,196 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6798.33 ms
+2026-07-04 22:50:59,196 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:51:17,818 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:51:17,818 - [ChatID: 6352219888] 1. Recepción: '¿Y tienes alguna Nike parecida?'
+2026-07-04 22:51:17,891 - [ChatID: 6352219888] 2. Latencia RAG: 73.17 ms
+2026-07-04 22:51:17,892 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:51:20,789 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2897.24 ms
+2026-07-04 22:51:21,645 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3827.00 ms
+2026-07-04 22:51:21,645 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:55:18,125 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:55:18,125 - [ChatID: 6352219888] 1. Recepción: 'quiero zapatillas negras, económicas y en talla 42'
+2026-07-04 22:55:18,425 - [ChatID: 6352219888] 2. Latencia RAG: 310.15 ms
+2026-07-04 22:55:18,438 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:55:23,913 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 5475.19 ms
+2026-07-04 22:55:24,763 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6644.36 ms
+2026-07-04 22:55:24,763 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:55:33,443 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:55:33,443 - [ChatID: 6352219888] 1. Recepción: '¿Y tienes alguna Nike parecida?'
+2026-07-04 22:55:33,525 - [ChatID: 6352219888] 2. Latencia RAG: 77.53 ms
+2026-07-04 22:55:33,525 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:55:38,862 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 5336.16 ms
+2026-07-04 22:55:39,718 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6270.67 ms
+2026-07-04 22:55:39,718 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:56:00,080 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 22:56:00,080 - [ChatID: 6352219888] 1. Recepción: 'hay nikes más baratas?'
+2026-07-04 22:56:00,143 - [ChatID: 6352219888] 2. Latencia RAG: 65.23 ms
+2026-07-04 22:56:00,143 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 22:56:06,032 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 5885.39 ms
+2026-07-04 22:56:06,876 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6800.73 ms
+2026-07-04 22:56:06,876 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:00:52,681 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:00:52,682 - [ChatID: 6352219888] 1. Recepción: 'quiero zapatillas negras, económicas y en talla 42'
+2026-07-04 23:00:57,228 - [ChatID: 6352219888] 2. Latencia RAG: 4545.64 ms
+2026-07-04 23:00:57,228 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:01:06,379 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 9152.78 ms
+2026-07-04 23:01:08,024 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 15345.03 ms
+2026-07-04 23:01:08,024 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:01:23,054 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:01:23,054 - [ChatID: 6352219888] 1. Recepción: '¿Y tienes alguna Nike parecida?'
+2026-07-04 23:01:23,383 - [ChatID: 6352219888] 2. Latencia RAG: 327.09 ms
+2026-07-04 23:01:23,385 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:01:27,272 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3887.47 ms
+2026-07-04 23:01:28,154 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 5099.67 ms
+2026-07-04 23:01:28,155 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:02:11,771 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:02:11,773 - [ChatID: 6352219888] 1. Recepción: 'quiero unas nike'
+2026-07-04 23:02:12,111 - [ChatID: 6352219888] 2. Latencia RAG: 336.60 ms
+2026-07-04 23:02:12,112 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:02:13,484 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 1371.47 ms
+2026-07-04 23:02:14,324 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 2552.81 ms
+2026-07-04 23:02:14,324 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:05:10,189 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:05:10,189 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, econ´omicas y en talla 42.'
+2026-07-04 23:05:10,587 - [ChatID: 6352219888] 2. Latencia RAG: 393.15 ms
+2026-07-04 23:05:10,587 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:05:12,054 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 1467.22 ms
+2026-07-04 23:05:12,907 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 2719.51 ms
+2026-07-04 23:05:12,907 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:05:42,949 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:05:42,949 - [ChatID: 6352219888] 1. Recepción: 'hola'
+2026-07-04 23:05:43,037 - [ChatID: 6352219888] 2. Latencia RAG: 84.62 ms
+2026-07-04 23:05:43,037 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:05:44,817 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 1773.73 ms
+2026-07-04 23:05:45,669 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 2718.23 ms
+2026-07-04 23:05:45,669 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:05:50,071 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:05:50,071 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, econ´omicas y en talla 42.'
+2026-07-04 23:05:50,169 - [ChatID: 6352219888] 2. Latencia RAG: 97.87 ms
+2026-07-04 23:05:50,170 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:05:52,027 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 1856.58 ms
+2026-07-04 23:05:52,887 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 2816.74 ms
+2026-07-04 23:05:52,888 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:07:21,197 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:07:21,201 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, econ´omicas y en talla 42.'
+2026-07-04 23:07:21,583 - [ChatID: 6352219888] 2. Latencia RAG: 390.67 ms
+2026-07-04 23:07:21,583 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:07:24,036 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2441.56 ms
+2026-07-04 23:07:24,887 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3690.36 ms
+2026-07-04 23:07:24,888 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:08:40,250 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:08:40,250 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, económicas y en talla 42.'
+2026-07-04 23:08:40,733 - [ChatID: 6352219888] 2. Latencia RAG: 478.09 ms
+2026-07-04 23:08:40,733 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:08:43,904 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3166.80 ms
+2026-07-04 23:08:44,769 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4519.35 ms
+2026-07-04 23:08:44,769 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:11:05,955 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:11:05,958 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, económicas y en talla 42.'
+2026-07-04 23:11:06,356 - [ChatID: 6352219888] 2. Latencia RAG: 398.28 ms
+2026-07-04 23:11:06,358 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:11:08,162 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 1801.87 ms
+2026-07-04 23:11:09,034 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3078.35 ms
+2026-07-04 23:11:09,034 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:17:23,426 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:17:23,426 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, económicas y en talla 42.'
+2026-07-04 23:17:24,236 - [ChatID: 6352219888] 2. Latencia RAG: 807.11 ms
+2026-07-04 23:17:24,236 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:17:33,288 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 9057.20 ms
+2026-07-04 23:17:34,160 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 10737.60 ms
+2026-07-04 23:17:34,160 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:17:48,126 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:17:48,126 - [ChatID: 6352219888] 1. Recepción: '¿Y tienes alguna Nike parecida?'
+2026-07-04 23:17:48,225 - [ChatID: 6352219888] 2. Latencia RAG: 99.35 ms
+2026-07-04 23:17:48,226 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:17:50,893 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2673.26 ms
+2026-07-04 23:17:51,752 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3626.65 ms
+2026-07-04 23:17:51,752 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:24:08,267 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:24:08,270 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, económicas y en talla 42.'
+2026-07-04 23:24:08,961 - [ChatID: 6352219888] 2. Latencia RAG: 689.39 ms
+2026-07-04 23:24:08,964 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:24:15,706 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 6741.65 ms
+2026-07-04 23:24:16,566 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 8299.37 ms
+2026-07-04 23:24:16,567 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:24:20,903 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:24:20,904 - [ChatID: 6352219888] 1. Recepción: '¿Y tienes alguna Nike parecida?'
+2026-07-04 23:24:21,015 - [ChatID: 6352219888] 2. Latencia RAG: 110.91 ms
+2026-07-04 23:24:21,016 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:24:32,869 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 11852.99 ms
+2026-07-04 23:24:33,737 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 12833.50 ms
+2026-07-04 23:24:33,737 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:24:46,224 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:24:46,224 - [ChatID: 6352219888] 1. Recepción: 'quiero la más barata'
+2026-07-04 23:24:46,305 - [ChatID: 6352219888] 2. Latencia RAG: 80.80 ms
+2026-07-04 23:24:46,306 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:24:49,972 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3665.37 ms
+2026-07-04 23:24:50,825 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4600.92 ms
+2026-07-04 23:24:50,826 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:33:05,338 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:33:05,341 - [ChatID: 6352219888] 1. Recepción: 'Quiero zapatillas negras, económicas y en talla 42.'
+2026-07-04 23:33:06,255 - [ChatID: 6352219888] 2. Latencia RAG: 912.94 ms
+2026-07-04 23:33:06,257 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:33:11,475 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 5217.60 ms
+2026-07-04 23:33:12,355 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 7016.95 ms
+2026-07-04 23:33:12,356 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:33:19,563 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:33:19,564 - [ChatID: 6352219888] 1. Recepción: '¿Y tienes alguna Nike parecida?'
+2026-07-04 23:33:19,659 - [ChatID: 6352219888] 2. Latencia RAG: 94.38 ms
+2026-07-04 23:33:19,660 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:33:25,008 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 5348.28 ms
+2026-07-04 23:33:25,886 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6322.28 ms
+2026-07-04 23:33:25,886 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:33:31,466 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:33:31,466 - [ChatID: 6352219888] 1. Recepción: 'quiero la más barata'
+2026-07-04 23:33:31,547 - [ChatID: 6352219888] 2. Latencia RAG: 80.06 ms
+2026-07-04 23:33:31,549 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:33:37,597 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 6046.97 ms
+2026-07-04 23:33:38,445 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6979.43 ms
+2026-07-04 23:33:38,445 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:33:54,475 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:33:54,475 - [ChatID: 6352219888] 1. Recepción: 'quiero la nike m'as barata'
+2026-07-04 23:33:54,541 - [ChatID: 6352219888] 2. Latencia RAG: 64.67 ms
+2026-07-04 23:33:54,541 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:34:04,830 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 10288.66 ms
+2026-07-04 23:34:05,762 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 11287.84 ms
+2026-07-04 23:34:05,762 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:36:54,810 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:36:54,812 - [ChatID: 6352219888] 1. Recepción: 'hola, busco algo cómodo para caminar mucho'
+2026-07-04 23:36:55,211 - [ChatID: 6352219888] 2. Latencia RAG: 397.93 ms
+2026-07-04 23:36:55,213 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:36:58,334 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3120.29 ms
+2026-07-04 23:36:59,200 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4390.83 ms
+2026-07-04 23:36:59,201 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:37:19,582 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:37:19,582 - [ChatID: 6352219888] 1. Recepción: 'cual me conviene si quiero algo más barato?'
+2026-07-04 23:37:20,604 - [ChatID: 6352219888] 2. Latencia RAG: 1018.40 ms
+2026-07-04 23:37:20,608 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:37:25,545 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 4936.46 ms
+2026-07-04 23:37:26,409 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6827.14 ms
+2026-07-04 23:37:26,409 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:37:49,118 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:37:49,118 - [ChatID: 6352219888] 1. Recepción: 'zapatillas más baratas'
+2026-07-04 23:37:49,184 - [ChatID: 6352219888] 2. Latencia RAG: 64.53 ms
+2026-07-04 23:37:49,185 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:37:54,442 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 5258.10 ms
+2026-07-04 23:37:55,509 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6390.59 ms
+2026-07-04 23:37:55,509 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:40:15,817 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:40:16,030 - [ChatID: 6352219888] 1. Recepción: 'hola, busco algo cómodo para caminar mucho'
+2026-07-04 23:40:24,269 - [ChatID: 6352219888] 2. Latencia RAG: 8237.65 ms
+2026-07-04 23:40:24,270 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:40:28,686 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 4415.84 ms
+2026-07-04 23:40:29,549 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 13731.45 ms
+2026-07-04 23:40:29,550 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:40:32,092 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:40:32,092 - [ChatID: 6352219888] 1. Recepción: 'cual me conviene si quiero algo más barato?'
+2026-07-04 23:40:32,159 - [ChatID: 6352219888] 2. Latencia RAG: 66.72 ms
+2026-07-04 23:40:32,159 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:40:37,663 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 5503.18 ms
+2026-07-04 23:40:38,524 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6431.90 ms
+2026-07-04 23:40:38,524 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:40:49,676 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 23:40:49,676 - [ChatID: 6352219888] 1. Recepción: 'Mu´estrame opciones para caminar en ciudad'
+2026-07-04 23:40:49,751 - [ChatID: 6352219888] 2. Latencia RAG: 75.15 ms
+2026-07-04 23:40:49,752 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 23:40:55,739 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 5986.99 ms
+2026-07-04 23:40:56,594 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6918.66 ms
+2026-07-04 23:40:56,595 - [ChatID: 6352219888] ------------------------------------------

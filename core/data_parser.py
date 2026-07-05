@@ -13,13 +13,13 @@ RUTA_EMBEDDINGS = os.path.join(os.path.dirname(__file__), "../data/embeddings.pk
 
 
 UMBRAL_PRODUCTOS = 0.07
-UMBRAL_POLITICAS = 0.20
-PRODUCTOS_CONSULTA = 3
+UMBRAL_POLITICAS = 0.05
+PRODUCTOS_CONSULTA = 4
 
 # Ponderación de la búsqueda híbrida: cuánto pesa la similitud semántica
 # (embeddings) vs. la coincidencia literal de palabras clave. Deben sumar 1.0.
-PESO_SEMANTICO = 0.7
-PESO_PALABRA_CLAVE = 0.3
+PESO_SEMANTICO = 0.5
+PESO_PALABRA_CLAVE = 0.5
 
 def product_data(producto):
     """
@@ -30,7 +30,10 @@ def product_data(producto):
         "nombre": producto.get("nombre", ""),
         "precio": producto.get("precio", 0),
         "tallas": producto.get("tallas", []),
-        "descripcion": producto.get("descripcion", "")
+        "descripcion": producto.get("descripcion", ""),
+        "marca": producto.get("marca", ""),
+        "colores": producto.get("colores", []),
+        "categoria": producto.get("categoria", "")
     }
 
 def policy_data(policy_text):
@@ -58,8 +61,21 @@ def construir_texto_politica(policy_text):
     return f"Tema: {policy_text.get('tema', '')}. {policy_text.get('contenido', '')}"
 
 def tokenizar(texto):
-    """Extrae el conjunto de palabras (en minúscula, sin puntuación) de un texto."""
-    return set(re.findall(r"\w+", texto.lower()))
+    """
+    Extrae el conjunto de palabras (en minúscula, sin puntuación) de un
+    texto, normalizando plurales simples (quita la 's' final en palabras
+    de más de 4 letras: "nikes" -> "nike", "zapatillas" -> "zapatilla").
+    Sin esto, la coincidencia de palabra clave fallaba por singular/plural
+    (ej. "nikes" en la consulta no matcheaba con "nike" en el catálogo).
+    """
+    palabras = re.findall(r"\w+", texto.lower())
+    normalizadas = set()
+    for palabra in palabras:
+        if len(palabra) > 4 and palabra.endswith("s"):
+            normalizadas.add(palabra[:-1])
+        else:
+            normalizadas.add(palabra)
+    return normalizadas
 
 with open(RUTA_PRODUCTOS, encoding="utf-8") as f:
     productos = json.load(f)
@@ -94,4 +110,3 @@ def generar_embeddings():
     return embeddings_productos, embeddings_politicas
 
 embeddings_productos, embeddings_politicas = generar_embeddings()
-
