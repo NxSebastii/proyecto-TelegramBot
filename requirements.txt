@@ -1,0 +1,6 @@
+python-telegram-bot
+sentence-transformers
+google-genai
+python-dotenv
+scikit-learn
+numpy
