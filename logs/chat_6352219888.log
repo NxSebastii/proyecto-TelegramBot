@@ -298,3 +298,13 @@ Es una zapatilla económica ideal para uso deportivo ligero y caminata casual. L
 2026-07-04 19:01:29,040 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 10000.91 ms
 2026-07-04 19:01:29,887 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 10890.99 ms
 2026-07-04 19:01:29,887 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 21:11:46,543 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 21:11:46,543 - [ChatID: 6352219888] 1. Recepción: 'hola'
+2026-07-04 21:11:46,605 - [ChatID: 6352219888] 2. Latencia RAG: 61.94 ms
+2026-07-04 21:14:30,128 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 21:14:30,128 - [ChatID: 6352219888] 1. Recepción: 'que chaquetas ofreces'
+2026-07-04 21:14:30,880 - [ChatID: 6352219888] 2. Latencia RAG: 747.63 ms
+2026-07-04 21:14:30,880 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 21:14:33,235 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2349.78 ms
+2026-07-04 21:14:34,111 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3980.34 ms
+2026-07-04 21:14:34,111 - [ChatID: 6352219888] ------------------------------------------
