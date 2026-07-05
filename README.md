@@ -26,11 +26,14 @@ La estructura modular garantiza la escalabilidad y facilita el desarrollo en par
  ┃ ┣ 📜 prompt_builder.py  # Ensamblador de contexto y formateo en Markdown
  ┃ ┗ 📜 telegram_app.py    # Controladores, handlers y webhook de Telegram
  ┣ 📂 core/                # Lógica de negocio y motor de búsqueda
- ┃ ┣ 📜 data_parser.py     # Limpieza, validación de JSONs y control de stock
+ ┃ ┣ 📜 data_parser.py     # Limpieza y validación de JSONs
+ ┃ ┣ 📜 filtros.py         # Filtros estructurados 
  ┃ ┗ 📜 search_engine.py   # Motor RAG híbrido y semántico
  ┣ 📂 data/                # Bases de datos estáticas
+ ┃ ┣ 📜 embeddings.pkl.py 
  ┃ ┣ 📜 productos.json
  ┃ ┗ 📜 politicas.json
+ ┣ 📂 logs/                # Registros de Logs seccioandos por usuario
  ┣ 📜 .env                 # Variables de entorno (No versionado)
  ┣ 📜 config.py            # Cargador centralizado de configuraciones
  ┣ 📜 main.py              # Orquestador y punto de entrada del sistema
