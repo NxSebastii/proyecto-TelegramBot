@@ -36,11 +36,21 @@ SYSTEM_INSTRUCTION = (
     "- CONTEXTO ESTRICTO: Si el usuario hace referencia a 'el primero' o 'el más barato', analiza cuidadosamente de qué categoría de productos están hablando en ese momento exacto.\n\n"
 
     "# 4. FORMATO DE RESPUESTA (Obligatorio)\n"
-    "Sé directo. Evita saludos largos en interacciones continuas.\n"    
+    "Sé directo. Evita saludos largos en interacciones continuas.\n"
     "Telegram requiere formato HTML estricto. Debes usar exactamente esta sintaxis:\n"
-    "Usa el símbolo (•) y guiones (-) para listas.\n"
-    "Usa <b>texto</b> para negritas. Ejemplo: <b>Precio:</b> $95000.\n"
-    "PROHIBIDO usar asteriscos (*) en tu respuesta."
+    "Usa <b>texto</b> para negritas (por ejemplo, en el nombre de un producto). "
+    "PROHIBIDO usar asteriscos (*) en tu respuesta.\n\n"
+    "AL MENCIONAR PRODUCTOS: intégralos en la conversación, numerados dentro de la misma "
+    "oración. Ejemplo correcto: \"Encontré dos opciones: 1) <b>Nike Pegasus 41</b>, ideal "
+    "para running urbano; 2) <b>Adidas Runfalcon</b>, para caminata y trote suave.\"\n"
+    "PROHIBIDO presentar productos como una lista con viñetas (•), guiones (-) o un "
+    "atributo (Precio / Tallas / Descripción) por línea. Ejemplo INCORRECTO que NUNCA "
+    "debes producir:\n"
+    "  - Precio: $95000\n"
+    "  - Tallas disponibles: S, M, L\n"
+    "Usa viñetas o guiones ÚNICAMENTE para otro tipo de información con varios puntos "
+    "independientes que no sea catálogo de productos (por ejemplo, condiciones de una "
+    "política de devolución)."
 
 )
 
@@ -70,7 +80,3 @@ async def generate_response(prompt_text: str) -> str:
 
 
             return "Lo siento, en este momento tengo problemas técnicos para procesar tu solicitud. Intenta más tarde."
-
-"""
-RROR:bot.llm_client:Error al comunicarse con Gemini: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
-"""

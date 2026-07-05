@@ -150,6 +150,20 @@
 2026-07-04 18:13:00,105 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 6069.22 ms
 2026-07-04 18:13:00,951 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 6973.70 ms
 2026-07-04 18:13:00,951 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:22:15,696 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:22:15,700 - [ChatID: 6352219888] 1. Recepción: 'Cuales son las zapatillas más baratas'
+2026-07-04 18:22:15,900 - [ChatID: 6352219888] 2. Latencia RAG: 205.78 ms
+2026-07-04 18:22:15,900 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:22:18,730 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2825.00 ms
+2026-07-04 18:22:19,597 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3899.94 ms
+2026-07-04 18:22:19,597 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:22:31,560 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:22:31,560 - [ChatID: 6352219888] 1. Recepción: 'Y hay talla 37?'
+2026-07-04 18:22:31,616 - [ChatID: 6352219888] 2. Latencia RAG: 55.68 ms
+2026-07-04 18:22:31,616 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:22:35,572 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3954.95 ms
+2026-07-04 18:22:36,412 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4859.30 ms
+2026-07-04 18:22:36,420 - [ChatID: 6352219888] ------------------------------------------
 2026-07-04 18:44:15,862 - [ChatID: 6352219888] ------------------------------------------
 2026-07-04 18:44:15,862 - [ChatID: 6352219888] 1. Recepción: 'Muéstrame opciones para caminar en la ciudad'
 2026-07-04 18:48:48,560 - [ChatID: 6352219888] ------------------------------------------
@@ -238,3 +252,49 @@ Es una zapatilla económica ideal para uso deportivo ligero y caminata casual. L
 2026-07-04 18:50:48,949 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3278.73 ms
 2026-07-04 18:50:49,828 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4209.18 ms
 2026-07-04 18:50:49,828 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:55:27,040 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:55:27,040 - [ChatID: 6352219888] 1. Recepción: 'Tienes chaquetas?'
+2026-07-04 18:55:27,214 - [ChatID: 6352219888] 2. Latencia RAG: 163.87 ms
+2026-07-04 18:55:27,214 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:55:30,206 - [ChatID: 6352219888] Respuesta Novac: ¡Claro! En este momento, tenemos disponible 1) la <b>Chaqueta Softshell The North Face</b>.
+- <b>Precio:</b> $109990
+- <b>Tallas disponibles:</b> S, M, L, XL
+- <b>Descripción:</b> Chaqueta softshell resistente al viento para clima frío. 🌬️
+2026-07-04 18:55:30,206 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2997.23 ms
+2026-07-04 18:55:31,058 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4007.09 ms
+2026-07-04 18:55:31,058 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:55:48,840 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 18:55:48,840 - [ChatID: 6352219888] 1. Recepción: 'Y más barata?'
+2026-07-04 18:55:48,891 - [ChatID: 6352219888] 2. Latencia RAG: 43.79 ms
+2026-07-04 18:55:48,891 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 18:55:51,436 - [ChatID: 6352219888] Respuesta Novac: En este momento, no tengo chaquetas con un precio inferior a la <b>Chaqueta Softshell The North Face</b> en mi catálogo. 💡
+2026-07-04 18:55:51,436 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 2558.49 ms
+2026-07-04 18:55:52,296 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 3456.52 ms
+2026-07-04 18:55:52,296 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 19:00:28,336 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 19:00:28,352 - [ChatID: 6352219888] 1. Recepción: 'Que tipo de productos tienes?'
+2026-07-04 19:00:28,508 - [ChatID: 6352219888] 2. Latencia RAG: 157.16 ms
+2026-07-04 19:00:28,508 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 19:00:32,082 - [ChatID: 6352219888] Respuesta Novac: ¡Hola! Como tu asistente de ventas, estoy listo para ayudarte a encontrar lo que buscas en ACME Retail. Sin embargo, no tengo una lista general de "tipos de productos" que pueda mostrarte directamente. Para darte la mejor asistencia, ¿podrías ser más específico sobre lo que buscas? Por ejemplo, puedes preguntarme por <b>zapatillas de running</b>, <b>ropa deportiva</b>, <b>accesorios tecnológicos</b> o por algún producto en particular que tengas en mente. ¡Así podremos encontrarlo juntos! 💡
+2026-07-04 19:00:32,082 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3583.98 ms
+2026-07-04 19:00:32,933 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4584.80 ms
+2026-07-04 19:00:32,933 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 19:01:04,903 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 19:01:04,919 - [ChatID: 6352219888] 1. Recepción: 'Busco ropa deportiva'
+2026-07-04 19:01:05,087 - [ChatID: 6352219888] 2. Latencia RAG: 167.36 ms
+2026-07-04 19:01:05,087 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 19:01:08,245 - [ChatID: 6352219888] Respuesta Novac: ¡Excelente! Tenemos varias opciones de ropa deportiva que te podrían interesar 🚀:
+1)  <b>Polerón Adidas Essentials</b>, ideal para entrenamiento suave o uso diario, con un precio de $54990 y disponible en tallas S, M, L, XL.
+2)  <b>Pantalón Under Armour Tech</b>, perfecto para entrenamiento y uso casual activo, por $44990, disponible en S, M, L, XL.
+3)  <b>Polera Nike Dri-FIT</b>, una opción respirable para entrenamiento, running y gimnasio, con un precio de $29990 y en tallas S, M, L, XL.
+2026-07-04 19:01:08,245 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 3167.79 ms
+2026-07-04 19:01:09,120 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 4205.59 ms
+2026-07-04 19:01:09,120 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 19:01:19,006 - [ChatID: 6352219888] ------------------------------------------
+2026-07-04 19:01:19,006 - [ChatID: 6352219888] 1. Recepción: 'El más barato'
+2026-07-04 19:01:19,045 - [ChatID: 6352219888] 2. Latencia RAG: 37.12 ms
+2026-07-04 19:01:19,045 - [ChatID: 6352219888] 3. Generando respuesta con Gemini...
+2026-07-04 19:01:29,040 - [ChatID: 6352219888] Respuesta Novac: El producto más económico de los que puedo ofrecerte ahora es la 1) <b>Toalla Cannon Baño</b>, con un precio de $12990 💡.
+2026-07-04 19:01:29,040 - [ChatID: 6352219888] 4. Latencia Inferencia LLM: 10000.91 ms
+2026-07-04 19:01:29,887 - [ChatID: 6352219888] 5. Latencia TOTAL End-to-End: 10890.99 ms
+2026-07-04 19:01:29,887 - [ChatID: 6352219888] ------------------------------------------
